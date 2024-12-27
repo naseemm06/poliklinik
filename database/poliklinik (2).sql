@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Des 2024 pada 14.21
--- Versi server: 10.4.24-MariaDB
--- Versi PHP: 8.1.6
+-- Waktu pembuatan: 27 Des 2024 pada 16.58
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,21 +34,14 @@ CREATE TABLE `daftar_poli` (
   `keluhan` text NOT NULL,
   `no_antrian` int(10) UNSIGNED NOT NULL,
   `status_periksa` enum('0','1') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `daftar_poli`
 --
 
 INSERT INTO `daftar_poli` (`id`, `id_pasien`, `id_jadwal`, `keluhan`, `no_antrian`, `status_periksa`) VALUES
-(3, 10, 8, 'Sakit tenggorokan perih\r\n', 1, '1'),
-(4, 13, 11, 'Gusi berdarah', 1, '1'),
-(5, 10, 8, 'Telinga sakit', 2, '0'),
-(6, 14, 13, 'Mata Merah', 1, '1'),
-(7, 15, 9, 'kurang gizi', 1, '0'),
-(8, 16, 8, 'sakit gigi', 3, '0'),
-(9, 15, 14, 'sakit', 1, '1'),
-(10, 18, 14, 'sakit ', 2, '1');
+(11, 20, 18, 'sakit telinga', 1, '1');
 
 -- --------------------------------------------------------
 
@@ -60,21 +53,16 @@ CREATE TABLE `detail_periksa` (
   `id` int(11) NOT NULL,
   `id_periksa` int(11) NOT NULL,
   `id_obat` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `detail_periksa`
 --
 
 INSERT INTO `detail_periksa` (`id`, `id_periksa`, `id_obat`) VALUES
-(4, 3, 13),
-(5, 3, 14),
-(6, 4, 19),
-(7, 5, 14),
-(8, 6, 17),
-(9, 6, 18),
-(10, 7, 13),
-(11, 7, 17);
+(10, 7, 12),
+(11, 7, 13),
+(12, 7, 17);
 
 -- --------------------------------------------------------
 
@@ -89,25 +77,14 @@ CREATE TABLE `dokter` (
   `alamat` varchar(255) NOT NULL,
   `no_hp` varchar(50) NOT NULL,
   `id_poli` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `dokter`
 --
 
 INSERT INTO `dokter` (`id`, `nama`, `password`, `alamat`, `no_hp`, `id_poli`) VALUES
-(12, 'Dr. Lamanuar', 'eee462bf8b460595e91b5aab19fd61c2', 'Jl. Merdeka No.5 RT10/01', '085131284647', 21),
-(13, 'Dr. Moza', '839ddfea673b23c89c87ca5bfd74ac3c', 'Jl. Najana ', '0891313467733', 11),
-(16, 'Dr.Eric', '0c646b9d777ee31b005228bdc3d469a1', 'Jl. Bangau No.2', '08945101793', 22),
-(19, 'budi', '00dfc53ee86af02e742515cdcf075ed3', 'Jl. Simpang 5', '089234567', 22),
-(20, 'santo', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'ungaran', '11111111', 23),
-(21, 'Dr.Mana', '5b5a59ef4429ff3d4c4d67398fce6a3a', 'Jln.Merdeka no11', '0827112321', 10),
-(22, 'Dr.Branded', '793056a901bd6268a55d4b84dea6a75c', 'Jl.Branded no22', '08521313713', 11),
-(23, 'Dr.Mirrorjade', 'd2fa42762105475c89b1d0bb86aeee59', 'Jln. Kemenangan no11', '08913613313213', 22),
-(24, 'Dr.Labyrinth', 'afb213dc40d4e94c4266d7bf422ace3b', 'Jl.Kelamaan no21', '08951624614', 23),
-(25, 'DrNaseem', 'mieayam', 'jl.ngaliyan no11', '08213213173', 10),
-(26, 'naseemkw', 'da1db40eb6073ddb47fe4c3728b70e85', 'jl.nana', '0896235136', 10),
-(27, 'mana', 'a01610228fe998f515a72dd730294d87', 'semarang', '082312313', 23);
+(31, 'drnaseemum', 'fcea920f7412b5da7be0cf42b8c93759', 'Tugurejo, Kota Semarang, Jawa Tengah', '085156624846', 10);
 
 -- --------------------------------------------------------
 
@@ -121,25 +98,16 @@ CREATE TABLE `jadwal_periksa` (
   `hari` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu') NOT NULL,
   `jam_mulai` time NOT NULL,
   `jam_selesai` time NOT NULL,
-  `aktif` char(1) NOT NULL DEFAULT 'N'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `aktif` char(10) NOT NULL DEFAULT 'NonAktif'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `jadwal_periksa`
 --
 
 INSERT INTO `jadwal_periksa` (`id`, `id_dokter`, `hari`, `jam_mulai`, `jam_selesai`, `aktif`) VALUES
-(6, 12, 'Senin', '08:00:00', '12:00:00', 'N'),
-(7, 12, 'Selasa', '13:00:00', '17:00:00', 'N'),
-(8, 12, 'Senin', '18:00:00', '22:00:00', 'Y'),
-(9, 13, 'Senin', '13:00:00', '17:00:00', 'Y'),
-(10, 16, 'Senin', '08:00:00', '12:00:00', 'N'),
-(11, 16, 'Selasa', '13:00:00', '17:00:00', 'Y'),
-(12, 19, 'Senin', '08:00:00', '12:30:00', 'N'),
-(13, 19, 'Senin', '13:00:00', '15:30:00', 'Y'),
-(14, 26, 'Kamis', '11:00:00', '15:00:00', 'Y'),
-(15, 26, 'Rabu', '01:00:00', '07:00:00', 'N'),
-(16, 26, 'Rabu', '12:00:00', '20:00:00', 'N');
+(18, 31, 'Senin', '08:00:00', '12:00:00', 'N'),
+(19, 31, 'Rabu', '13:00:00', '16:00:00', 'Y');
 
 -- --------------------------------------------------------
 
@@ -152,7 +120,7 @@ CREATE TABLE `obat` (
   `nama_obat` varchar(50) NOT NULL,
   `kemasan` varchar(35) NOT NULL,
   `harga` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `obat`
@@ -181,19 +149,17 @@ CREATE TABLE `pasien` (
   `no_ktp` varchar(255) NOT NULL,
   `no_hp` varchar(50) NOT NULL,
   `no_rm` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `pasien`
 --
 
 INSERT INTO `pasien` (`id`, `nama`, `password`, `alamat`, `no_ktp`, `no_hp`, `no_rm`) VALUES
-(10, 'Andra', 'e83ef9da2046e040c6a7017fd6912e08', 'Semarang', '123', '085', '202401-001'),
-(13, 'Budi', '827ccb0eea8a706c4c34a16891f84e7b', 'Semarang', '0987654', '98765', '202401-002'),
-(14, 'Dian', '827ccb0eea8a706c4c34a16891f84e7b', 'Semarang', '9876543', '0878', '202401-003'),
-(15, 'panji', '81dc9bdb52d04dc20036dbd8313ed055', 'ungaran', '1111', '6666666', '202412-004'),
-(16, 'nana', 'a01610228fe998f515a72dd730294d87', 'ungaran timur', '131233', '087361224', '202412-005'),
-(18, 'budi', 'a01610228fe998f515a72dd730294d87', 'semarang', '332213173', '0896446744', '202412-007');
+(17, 'naseem', '526f1fb176129258e12ceaeed24d99a5', 'Tugurejo, Kota Semarang, Jawa Tengah', '11111111', '085156624846', '202412-006'),
+(18, 'naseem', 'fcea920f7412b5da7be0cf42b8c93759', 'Tugurejo, Kota Semarang, Jawa Tengah', '1111111111111111', '085156624846', '202412-007'),
+(19, 'naseem', 'fcea920f7412b5da7be0cf42b8c93759', 'Tugurejo, Kota Semarang, Jawa Tengah', '6767676767676', '085156624846', '202412-008'),
+(20, 'naseemum', 'fcea920f7412b5da7be0cf42b8c93759', 'Tugurejo, Kota Semarang, Jawa Tengah', '999999999', '085156624846', '202412-009');
 
 -- --------------------------------------------------------
 
@@ -207,18 +173,14 @@ CREATE TABLE `periksa` (
   `tgl_periksa` datetime NOT NULL,
   `catatan` text NOT NULL,
   `biaya_periksa` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `periksa`
 --
 
 INSERT INTO `periksa` (`id`, `id_daftar_poli`, `tgl_periksa`, `catatan`, `biaya_periksa`) VALUES
-(3, 3, '2024-01-08 01:07:00', 'silahkan tidur cukup', 170000),
-(4, 6, '2024-01-08 14:15:00', 'sudah sedikit membaik, jangan lupa habiskan obatnya', 158000),
-(5, 4, '2024-12-10 09:57:00', 'perbanyak minum vitamin', 160000),
-(6, 9, '2024-12-12 13:11:00', 'minum obat secara rutin', 185000),
-(7, 10, '2024-12-13 20:07:00', 'rutin minum obat', 183000);
+(7, 11, '2024-11-28 09:00:00', 'sudah hampir sembuh', 215000);
 
 -- --------------------------------------------------------
 
@@ -230,7 +192,7 @@ CREATE TABLE `poli` (
   `id` int(11) NOT NULL,
   `nama_poli` varchar(25) NOT NULL,
   `keterangan` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `poli`
@@ -240,9 +202,9 @@ INSERT INTO `poli` (`id`, `nama_poli`, `keterangan`) VALUES
 (10, 'Poli THT', 'Available'),
 (11, 'Poli Gigi', 'Available'),
 (21, 'Poli Gizi', 'kosong'),
-(22, 'Poli Mata Baik', 'kosong'),
+(22, 'Poli Mata', 'kosong'),
 (23, 'Poli Syaraf', 'Available '),
-(24, 'Poli jantung', '');
+(24, 'Poli penyakit dalam', 'poli untuk penyakit dalam');
 
 --
 -- Indexes for dumped tables
@@ -311,25 +273,25 @@ ALTER TABLE `poli`
 -- AUTO_INCREMENT untuk tabel `daftar_poli`
 --
 ALTER TABLE `daftar_poli`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `detail_periksa`
 --
 ALTER TABLE `detail_periksa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `dokter`
 --
 ALTER TABLE `dokter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT untuk tabel `jadwal_periksa`
 --
 ALTER TABLE `jadwal_periksa`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT untuk tabel `obat`
@@ -341,7 +303,7 @@ ALTER TABLE `obat`
 -- AUTO_INCREMENT untuk tabel `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `periksa`
@@ -363,33 +325,33 @@ ALTER TABLE `poli`
 -- Ketidakleluasaan untuk tabel `daftar_poli`
 --
 ALTER TABLE `daftar_poli`
-  ADD CONSTRAINT `fk_daftarPoli_jadwal` FOREIGN KEY (`id_jadwal`) REFERENCES `jadwal_periksa` (`id`),
-  ADD CONSTRAINT `fk_daftarPoli_pasien` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id`);
+  ADD CONSTRAINT `fk_daftarPoli_jadwal` FOREIGN KEY (`id_jadwal`) REFERENCES `jadwal_periksa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_daftarPoli_pasien` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `detail_periksa`
 --
 ALTER TABLE `detail_periksa`
-  ADD CONSTRAINT `fk_detailPeriksa_obat` FOREIGN KEY (`id_obat`) REFERENCES `obat` (`id`),
-  ADD CONSTRAINT `fk_detailPeriksa_periksa` FOREIGN KEY (`id_periksa`) REFERENCES `periksa` (`id`);
+  ADD CONSTRAINT `fk_detailPeriksa_obat` FOREIGN KEY (`id_obat`) REFERENCES `obat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_detailPeriksa_periksa` FOREIGN KEY (`id_periksa`) REFERENCES `periksa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `dokter`
 --
 ALTER TABLE `dokter`
-  ADD CONSTRAINT `fk_dokter_poli` FOREIGN KEY (`id_poli`) REFERENCES `poli` (`id`);
+  ADD CONSTRAINT `fk_dokter_poli` FOREIGN KEY (`id_poli`) REFERENCES `poli` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `jadwal_periksa`
 --
 ALTER TABLE `jadwal_periksa`
-  ADD CONSTRAINT `fk_jadwal_dokter` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id`);
+  ADD CONSTRAINT `fk_jadwal_dokter` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `periksa`
 --
 ALTER TABLE `periksa`
-  ADD CONSTRAINT `fk_periksa_daftarPoli` FOREIGN KEY (`id_daftar_poli`) REFERENCES `daftar_poli` (`id`);
+  ADD CONSTRAINT `fk_periksa_daftarPoli` FOREIGN KEY (`id_daftar_poli`) REFERENCES `daftar_poli` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
