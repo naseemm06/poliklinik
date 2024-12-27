@@ -94,19 +94,26 @@
 
         .floating-word>div {
             flex: 1;
+            /* Flex-grow to fill space */
             max-width: 200px;
+            /* Maximum width for each column */
             min-width: 150px;
+            /* Minimum width for each column */
         }
 
         .floating-word img {
             max-height: 100px;
+            /* Maximum height for images */
             width: auto;
+            /* Maintain aspect ratio */
             margin-bottom: 1rem;
+            /* Space between image and text */
         }
 
 
         .tagline p {
             font-size: 1.5rem;
+            /* Responsive font size */
             color: #000;
         }
 
@@ -115,6 +122,7 @@
             max-width: 18rem;
             margin: 1rem;
             display: inline-block;
+            /* Changed to inline-block for better responsiveness */
         }
 
         .galeri-img-top {
@@ -125,14 +133,17 @@
         @media (max-width: 768px) {
             .title {
                 font-size: 1.5rem;
+                /* Smaller font size for smaller screens */
             }
 
             .tagline p {
                 font-size: 1.2rem;
+                /* Smaller font size for smaller screens */
             }
 
             .floating-container {
                 margin-top: -25%;
+                /* Increased negative margin for better overlap */
             }
         }
     </style>
@@ -144,6 +155,7 @@
         <p>Kami Siap Melayani Kesehatan Mahasiswa dan Staf Udinus dengan Hati</p>
     </section>
 
+    <!-- Tambahkan div yang diminta di sini -->
     <div class="row mb-4">
         <div class="col-12">
             <div style="background-image: url('assets/images/gedung.jpg'); background-size: cover; height: 200px; position: relative;">
@@ -151,33 +163,33 @@
                     Pakai Masker - Tetap Jaga Protokol Kesehatan!
                 </marquee>
             </div>
-            <section class="list-section">
-                <div class="list-container">
-                    <h2 style="text-align: center;">Layanan Kami</h2>
-                    <ul class="service-list">
-                        <li>
-                            <i class="icon fas fa-stethoscope"></i>
-                            <span class="service-text">Layanan Medis Umum</span>
-                        </li>
-                        <li>
-                            <i class="icon fas fa-user-md"></i>
-                            <span class="service-text">Pemeriksaan Spesialis</span>
-                        </li>
-                        <li>
-                            <i class="icon fas fa-hospital"></i>
-                            <span class="service-text">Fasilitas Kesehatan Modern</span>
-                        </li>
-                        <li>
-                            <i class="icon fas fa-comments"></i>
-                            <span class="service-text">Konsultasi Kesehatan</span>
-                        </li>
-                        <li>
-                            <i class="icon fas fa-heartbeat"></i>
-                            <span class="service-text">Program Kesehatan Preventif</span>
-                        </li>
-                    </ul>
-                </div>
-            </section>
+    <section class="list-section">
+        <div class="list-container">
+            <h2 style="text-align: center;">Layanan Kami</h2>
+            <ul class="service-list">
+                <li>
+                    <i class="icon fas fa-stethoscope"></i>
+                    <span class="service-text">Layanan Medis Umum</span>
+                </li>
+                <li>
+                    <i class="icon fas fa-user-md"></i>
+                    <span class="service-text">Pemeriksaan Spesialis</span>
+                </li>
+                <li>
+                    <i class="icon fas fa-hospital"></i>
+                    <span class="service-text">Fasilitas Kesehatan Modern</span>
+                </li>
+                <li>
+                    <i class="icon fas fa-comments"></i>
+                    <span class="service-text">Konsultasi Kesehatan</span>
+                </li>
+                <li>
+                    <i class="icon fas fa-heartbeat"></i>
+                    <span class="service-text">Program Kesehatan Preventif</span>
+                </li>
+            </ul>
+        </div>
+    </section>
 </body>
 
 </html>

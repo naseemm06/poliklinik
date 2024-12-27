@@ -116,7 +116,6 @@ if ($result_pasien && $result_dokter && $result_poli && $result_obat) {
                     <div class="small-box bg-info">
                         <div class="inner">
                             <h3><?php echo $jumlah_pasien; ?></h3>
-
                             <p>Jumlah Pasien</p>
                         </div>
                         <div class="icon">

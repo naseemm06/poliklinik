@@ -11,9 +11,10 @@
                 </ol>
             </div>
         </div>
-    </div>
+    </div><!-- /.container-fluid -->
 </section>
 
+<!-- Main content -->
 <section class="content">
     <div class="row">
         <div class="col-md-4">
@@ -31,15 +32,15 @@
                         <div class="form-group">
                             <label for="poli">Pilih Poli</label>
                             <select class="form-control" id="poli" name="poli" required>
-                                <option value="" disabled selected>Pilih Poli</option>
+                            <option value="" disabled selected>Pilih Poli</option>
                                 <?php
                                 require 'config/koneksi.php';
                                 $query = "SELECT * FROM poli";
-                                $result = mysqli_query($mysqli, $query);
+                                $result = mysqli_query($mysqli,$query);
                                 while ($dataPoli = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <option value="<?php echo $dataPoli['id'] ?>">
-                                        <?php echo $dataPoli['nama_poli'] ?></option>
+                            ?>
+                                <option value="<?php echo $dataPoli['id'] ?>">
+                                    <?php echo $dataPoli['nama_poli'] ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -58,7 +59,9 @@
                         </button>
                     </form>
                 </div>
+                <!-- /.card-body -->
             </div>
+            <!-- /.card -->
         </div>
         <div class="col-md-8">
             <div class="card card-primary">
@@ -81,6 +84,7 @@
                         </thead>
                         <tbody>
 
+                            <!-- TAMPILKAN DATA OBAT DI SINI -->
                             <?php
                             require 'config/koneksi.php';
                             $no = 1;
@@ -88,26 +92,28 @@
                             $result = mysqli_query($mysqli, $query);
 
                             while ($data = mysqli_fetch_assoc($result)) {
+                                # code...  
                             ?>
-                                <tr>
-                                    <td><?php echo $no++ ?></td>
-                                    <td><?php echo $data['nama_poli'] ?></td>
-                                    <td><?php echo $data['nama'] ?></td>
-                                    <td><?php echo $data['hari'] ?></td>
-                                    <td><?php echo $data['jam_mulai'] ?></td>
-                                    <td><?php echo $data['jam_selesai'] ?></td>
-                                    <td><?php echo $data['no_antrian'] ?></td>
-                                    <td>
-                                        <a href="detailDaftarPoli.php?id=<?php echo $data['idDaftarPoli'] ?>"
-                                            class='btn btn-sm btn-success edit-btn'>Detail</a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td><?php echo $no++ ?></td>
+                                <td><?php echo $data['nama_poli'] ?></td>
+                                <td><?php echo $data['nama'] ?></td>
+                                <td><?php echo $data['hari'] ?></td>
+                                <td><?php echo $data['jam_mulai'] ?></td>
+                                <td><?php echo $data['jam_selesai'] ?></td>
+                                <td><?php echo $data['no_antrian'] ?></td>
+                                <td>
+                                    <a href="detailDaftarPoli.php?id=<?php echo $data['idDaftarPoli'] ?>"
+                                        class='btn btn-sm btn-success edit-btn'>Detail</a>
+                                </td>
+                            </tr>
                             <?php } ?>
 
                         </tbody>
                     </table>
                 </div>
             </div>
+            <!-- /.card -->
         </div>
     </div>
 </section>

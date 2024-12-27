@@ -1,257 +1,223 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Dokter - Udinus Poliklinik</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+	<title>Login Dokter</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #517f5a 0%, #2c442f 100%);
-            padding: 2rem;
-        }
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
 
-        .login-container {
-            width: 100%;
-            max-width: 1000px;
-            min-height: 600px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            display: flex;
-            overflow: hidden;
-        }
+		body {
+			background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			font-family: 'Poppins', sans-serif;
+			height: 100vh;
+			margin: 0;
+		}
 
-        .left-container {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-        }
+		.container {
+			background-color: #fff;
+			border-radius: 20px;
+			box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+			position: relative;
+			overflow: hidden;
+			width: 868px;
+			max-width: 100%;
+			min-height: 480px;
+		}
 
-        .left-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
+		h4 {
+			color: #2d3436;
+			font-weight: 600;
+			margin-bottom: 1rem;
+		}
 
-        .left-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(81, 127, 90, 0.9) 0%, rgba(44, 68, 47, 0.9) 100%);
-        }
+		.medical-icon {
+			color: #20bf6b;
+			font-size: 2.5rem;
+			margin-bottom: 1.5rem;
+		}
 
-        .left-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            z-index: 1;
-            width: 80%;
-        }
+		p {
+			color: #636e72;
+			font-size: 0.95rem;
+			line-height: 1.6;
+			margin: 1rem 0;
+		}
 
-        .left-overlay h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
+		form {
+			background-color: #FFFFFF;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			padding: 0 60px;
+			height: 100%;
+			text-align: center;
+		}
 
-        .left-overlay p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
+		.form-container {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 50%;
+			height: 100%;
+			transition: all 0.6s ease-in-out;
+		}
 
-        .right-container {
-            flex: 1;
-            padding: 4rem 3rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+		input {
+			background-color: #f8f9fa;
+			border: 1px solid #e9ecef;
+			border-radius: 10px;
+			padding: 15px;
+			margin: 8px 0;
+			width: 100%;
+			font-size: 0.9rem;
+			transition: all 0.3s ease;
+		}
 
-        .login-form {
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-        }
+		input:focus {
+			outline: none;
+			border-color: #20bf6b;
+			box-shadow: 0 0 0 3px rgba(32, 191, 107, 0.1);
+		}
 
-        .login-form h4 {
-            font-size: 1.8rem;
-            color: #333;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
+		button {
+			border-radius: 30px;
+			border: none;
+			background: linear-gradient(135deg, #20bf6b, #0fb9b1);
+			color: #FFFFFF;
+			font-size: 0.9rem;
+			font-weight: 600;
+			padding: 14px 50px;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+			transition: all 0.3s ease;
+			cursor: pointer;
+			margin-top: 1rem;
+		}
 
-        .login-box-msg {
-            color: #666;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
+		button:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 7px 14px rgba(32, 191, 107, 0.1);
+		}
 
-        .text-success {
-            color: #517f5a;
-            font-weight: 600;
-        }
+		.overlay-container {
+			position: absolute;
+			top: 0;
+			left: 50%;
+			width: 50%;
+			height: 100%;
+			overflow: hidden;
+			transition: transform 0.6s ease-in-out;
+			z-index: 100;
+		}
 
-        .form-group {
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
+		.overlay {
+			background: linear-gradient(135deg, #20bf6b, #0fb9b1);
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: 0 0;
+			color: #FFFFFF;
+			position: relative;
+			left: -100%;
+			height: 100%;
+			width: 200%;
+			transform: translateX(0);
+			transition: transform 0.6s ease-in-out;
+		}
 
-        .form-group label {
-            display: block;
-            color: #555;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
+		.overlay-panel {
+			position: absolute;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			padding: 0 40px;
+			text-align: center;
+			top: 0;
+			height: 100%;
+			width: 50%;
+			transform: translateX(0);
+			transition: transform 0.6s ease-in-out;
+		}
 
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem;
-            border: none;
-            border-bottom: 2px solid #eee;
-            background: #f8f9fa;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
+		.overlay-right {
+			right: 0;
+			transform: translateX(0);
+		}
 
-        .form-group input:focus {
-            outline: none;
-            border-color: #517f5a;
-            background: #fff;
-            box-shadow: 0 2px 4px rgba(81, 127, 90, 0.1);
-        }
+		.patient-link {
+			margin-top: 1rem;
+			color: #20bf6b;
+			text-decoration: none;
+			font-size: 0.9rem;
+			transition: all 0.3s ease;
+		}
 
-        .form-group i {
-            position: absolute;
-            right: 12px;
-            top: 35px;
-            color: #888;
-        }
+		.patient-link:hover {
+			color: #0fb9b1;
+			text-decoration: none;
+		}
 
-        .btn-login {
-            width: 100%;
-            padding: 1rem;
-            background: #517f5a;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
+		/* Responsive Design */
+		@media (max-width: 768px) {
+			.container {
+				min-height: 400px;
+				width: 90%;
+			}
 
-        .btn-login:hover {
-            background: #446b4c;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(81, 127, 90, 0.3);
-        }
+			.overlay-container {
+				display: none;
+			}
 
-        .patient-link {
-            text-align: center;
-            margin-top: 2rem;
-        }
+			.form-container {
+				width: 100%;
+			}
 
-        .patient-link a {
-            color: #517f5a;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .patient-link a:hover {
-            color: #446b4c;
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .login-container {
-                flex-direction: column;
-            }
-
-            .left-container {
-                min-height: 200px;
-            }
-
-            .right-container {
-                padding: 2rem 1.5rem;
-            }
-        }
-    </style>
+			form {
+				padding: 0 20px;
+			}
+		}
+	</style>
 </head>
 
 <body>
-    <div class="login-container">
-        <div class="left-container">
-            <img src="assets/images/logo_poli.jpg" alt="Login Image">
-            <div class="left-overlay">
-                <h2>Area Dokter</h2>
-                <p>Selamat datang di portal khusus dokter. Bersama kita berikan pelayanan terbaik untuk pasien.</p>
-            </div>
-        </div>
-        <div class="right-container">
-            <div class="login-form">
-                <h4>Login Dokter</h4>
-                <p class="login-box-msg">Silahkan login sebagai <span class="text-success">Dokter</span> untuk melayani pasien</p>
-
-                <form action="pages/login/checkLogin.php" method="post">
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" name="username" required>
-                        <i class="fas fa-user-md"></i>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" required>
-                        <i class="fas fa-lock"></i>
-                    </div>
-
-                    <button type="submit" class="btn-login">
-                        <i class="fas fa-stethoscope"></i>
-                        Masuk sebagai Dokter
-                    </button>
-                </form>
-
-                <div class="patient-link">
-                    <a href="loginUser.php">
-                        <i class="fas fa-hospital-user"></i>
-                        Login sebagai Pasien
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="container" id="container">
+		<div class="form-container">
+			<form action="pages/login/checkLogin.php" method="post">
+				<i class="fas fa-user-md medical-icon"></i>
+				<h4>Portal Dokter</h4>
+				<p>Selamat datang kembali! Silakan login untuk melayani pasien</p>
+				<input type="text" name="username" placeholder="Username" required />
+				<input type="password" name="password" placeholder="Password" required />
+				<button type="submit">Masuk</button>
+				<a href="loginUser.php" class="patient-link">
+					<i class="fas fa-user"></i> Portal Pasien
+				</a>
+			</form>
+		</div>
+		<div class="overlay-container">
+			<div class="overlay">
+				<div class="overlay-panel overlay-right">
+					<i class="fas fa-hospital-user" style="font-size: 3rem; margin-bottom: 1.5rem;"></i>
+					<h4>Selamat Datang, Dokter!</h4>
+					<p>Sistem Informasi Poliklinik<br>Melayani dengan sepenuh hati</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

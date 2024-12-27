@@ -12,11 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $jamSelesai = $_POST["jamSelesai"];
     $aktif = $_POST['aktif'];
 
-    // Sebelum meng-update jadwal_periksa, atur semua nilai 'aktif' menjadi 'NonAktif' untuk dokter tertentu
-    $resetAktifQuery = "UPDATE jadwal_periksa SET aktif='NonAktif' WHERE id_dokter='$idDokter'";
+    // Sebelum meng-update jadwal_periksa, atur semua nilai 'aktif' menjadi 'N' untuk dokter tertentu
+    $resetAktifQuery = "UPDATE jadwal_periksa SET aktif='N' WHERE id_dokter='$idDokter'";
     mysqli_query($mysqli, $resetAktifQuery);
 
-    // Hanya satu jadwal yang boleh aktif, atur nilai 'aktif' menjadi 'Aktif' untuk jadwal yang sedang di-edit
+    // Hanya satu jadwal yang boleh aktif, atur nilai 'aktif' menjadi 'Y' untuk jadwal yang sedang di-edit
     $setAktifQuery = "UPDATE jadwal_periksa SET aktif='$aktif' WHERE id='$id'";
     mysqli_query($mysqli, $setAktifQuery);
 
@@ -25,27 +25,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     AND id_dokter = '$idDokter' AND hari = '$hari' 
     AND ((jam_mulai < '$jamSelesai' AND jam_selesai > '$jamMulai') OR (jam_mulai < '$jamMulai' AND jam_selesai > '$jamMulai'))";
 
-    $resultOverlap = mysqli_query($mysqli, $queryOverlap);
-
-    if (mysqli_num_rows($resultOverlap) > 0) {
+    $resultOverlap = mysqli_query($mysqli,$queryOverlap);
+    
+    if (mysqli_num_rows($resultOverlap)>0) {
         echo '<script>alert("Dokter lain telah mengambil jadwal ini");window.location.href="../../jadwalPeriksa.php";</script>';
-    } else {
+    }
+    else{
         // Query untuk menambahkan data obat ke dalam tabel
         $query = "UPDATE jadwal_periksa SET hari = '$hari', jam_mulai = '$jamMulai', jam_selesai = '$jamSelesai', aktif = '$aktif' WHERE id = '$id'";
 
+        
 
-
-
+        // if ($koneksi->query($query) === TRUE) {
+        // Eksekusi query
         if (mysqli_query($mysqli, $query)) {
+            // Jika berhasil, redirect kembali ke halaman utama atau sesuaikan dengan kebutuhan Anda
+            // header("Location: ../../index.php");
+            // exit();
             echo '<script>';
             echo 'alert("Jadwal berhasil diubah!");';
             echo 'window.location.href = "../../jadwalPeriksa.php";';
             echo '</script>';
             exit();
         } else {
+            // Jika terjadi kesalahan, tampilkan pesan error
             echo "Error: " . $query . "<br>" . mysqli_error($mysqli);
         }
     }
 }
 
+// Tutup koneksi
 mysqli_close($mysqli);
+?>
